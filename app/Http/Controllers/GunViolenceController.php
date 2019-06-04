@@ -14,11 +14,25 @@ class GunViolenceController extends Controller
         //
     }
 
-    public function getList(){
+    public function getList()
+    {
         return "Message from the controller - Partial list data goes here";
     }
 
-    public function getFullRecord($id){
+    public function getFullRecord($id)
+    {
         return "Message from the controller - Full record goes here. Id is {$id}";
     }
+
+    public function upsertIncident()
+    { }
+
+    public function upsertSuspect()
+    { }
+
+    public function upsertVictim()
+    { }
+
+    public function deleteRecord()
+    { }
 }

@@ -15,16 +15,12 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/json', function () {
-    return response()->json(['ok' => true]);
-});
-
 //Gun Violence Tracker
 $router->group(['prefix' => 'gun-violence-tracker'], function () use ($router) {
     $router->get('get-list', 'GunViolenceController@getList');
     $router->get('get-full-record/{id}', 'GunViolenceController@getFullRecord');
-    $router->post('upsert-incident', function () { });
-    $router->post('upsert-suspect', function () { });
-    $router->post('upsert-victim', function () { });
-    $router->delete('record', function () { });
+    $router->post('upsert-incident', 'GunViolenceController@upsertIncident');
+    $router->post('upsert-suspect', 'GunViolenceController@upsertSuspect');
+    $router->post('upsert-victim', 'GunViolenceController@upsertVictim');
+    $router->delete('delete-record', 'GunViolenceController@deleteRecord');
 });
