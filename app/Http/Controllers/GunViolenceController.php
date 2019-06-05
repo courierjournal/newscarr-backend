@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class GunViolenceController extends Controller
 {
     /**
@@ -21,11 +23,13 @@ class GunViolenceController extends Controller
 
     public function getFullRecord($id)
     {
-        return "Message from the controller - Full record goes here. Id is {$id}";
+        return "Message from the controller - Full record goes here. ID is {$id}";
     }
 
-    public function upsertIncident()
-    { }
+    public function upsertIncident(Request $request)
+    {
+        return "Message from the controller - Full body is here " . json_encode($request->post());
+    }
 
     public function upsertSuspect()
     { }
