@@ -16,7 +16,7 @@ $router->get('/', function () use ($router) {
 });
 
 //Gun Violence Tracker
-$router->group(['prefix' => 'gun-violence-tracker'], function () use ($router) {
+$router->group(['prefix' => 'gun-violence-database'], function () use ($router) {
     $router->get('get-list', 'GunViolenceController@getList');
     $router->get('get-full-record/{id}', 'GunViolenceController@getFullRecord');
     $router->post('upsert-incident', 'GunViolenceController@upsertIncident');
