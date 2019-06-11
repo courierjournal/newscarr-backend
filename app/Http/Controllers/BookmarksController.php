@@ -5,23 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class GunViolenceController extends Controller
+class ContactsController extends Controller
 {
-    //Truncate narratives greater than this length with an ellipsis
-    private const MAXNARRATIVE = 50;
 
-    //The max number of list results to return
-    private const MAXLISTRESULTS = 40;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         config(["database.connections.mysql" => [
-            "database" => "gun_violence_database"
+            "database" => "contacts"
         ]]);
     }
 
@@ -42,19 +32,6 @@ class GunViolenceController extends Controller
         return response()->json($list);
     }
 
-    public function getFullRecord($id)
-    {
-        $incident = DB::select('SELECT * FROM incidents WHERE id = ?', [$id]);
-        $victims = DB::select('SELECT * FROM victims WHERE incident_id = ?', [$id]);;
-        $suspects = DB::select('SELECT * FROM suspects WHERE incident_id = ?', [$id]);;
-
-        $output = [
-            "incident" => $incident[0],
-            "victims" => $victims,
-            "suspects" => $suspects
-        ];
-        return response()->json($output);
-    }
 
     public function upsertRecord(Request $request)
     {
