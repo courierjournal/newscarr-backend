@@ -10,9 +10,7 @@ class ContactsController extends Controller
 
     public function __construct()
     {
-        config(["database.connections.mysql" => [
-            "database" => "contacts"
-        ]]);
+        config(['database.connections.privatedb.database' => 'contacts']);
     }
 
     /**
@@ -22,13 +20,8 @@ class ContactsController extends Controller
      */
     public function getList(Request $request)
     {
-        $query = 'SELECT incidents.id, incidents.address, incidents.date, incidents.narrative, COUNT(victims.incident_id) as victimCount FROM incidents LEFT JOIN victims ON incidents.id=victims.incident_id GROUP BY incidents.id ORDER BY incidents.date DESC';
-        $list = DB::select($query);
-        foreach ($list as $index => $row) {
-            if (strlen($row->narrative) > 50) {
-                $list[$index]->narrative = substr($row->narrative, 0, self::MAXNARRATIVE) . "...";
-            }
-        }
+        $query = 'SELECT * FROM contacts ORDER BY category ASC, contact_person ASC';
+        $list = DB::connection('privatedb')->select($query);
         return response()->json($list);
     }
 

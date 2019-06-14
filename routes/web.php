@@ -7,6 +7,7 @@ $router->get('/', function () use ($router) {
 //Contacts
 $router->group(['prefix' => 'contacts'], function () use ($router) {
     $router->get('get-list', 'ContactsController@getList');
+    $router->get('get-full-record/{id}', 'ContactsController@getFullRecord');
     $router->post('upsert-record', 'ContactsController@upsertRecord');
     $router->delete('delete-record', 'ContactsController@deleteRecord');
 });
