@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class GunViolenceController extends Controller
 {
     //Truncate narratives greater than this length with an ellipsis
-    private const MAXNARRATIVE = 50;
+    private const MAXNARRATIVE = 90;
 
     //The max number of list results to return
     private const MAXLISTRESULTS = 40;

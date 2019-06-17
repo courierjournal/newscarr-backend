@@ -7,10 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 class ContactsController extends Controller
 {
+    private $db;
 
     public function __construct()
     {
         config(['database.connections.privatedb.database' => 'contacts']);
+        $this->db = DB::connection('privatedb');
     }
 
     /**
@@ -20,22 +22,19 @@ class ContactsController extends Controller
      */
     public function getList(Request $request)
     {
-        $query = 'SELECT * FROM contacts ORDER BY category ASC, contact_person ASC';
-        $list = DB::connection('privatedb')->select($query);
+        $query = 'SELECT id, category, name, contact_person AS contactPerson, phone, phone_ext AS ext, alt_phone AS altPhone, email, notes FROM contacts ORDER BY category ASC, contactPerson ASC';
+        $list = $this->db->select($query);
         return response()->json($list);
+    }
+
+    public function getFullList(Request $request){
+
     }
 
 
     public function upsertRecord(Request $request)
     {
-        //Upsert incident
-        DB: insert('INSERT INTO incidents (id, date, time, address, city, state, zip, lat, lng, narrative, notes, guns, source, story) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
-        //Upsert victims
-        foreach ($victim as $request->post->victims) { }
-        //Upsert suspects
-        foreach ($suspect as $request->post->suspects) { }
 
-        return "Message from the controller - Full body is here " . json_encode($request->post());
     }
 
     public function deleteRecord()
