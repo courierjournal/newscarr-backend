@@ -15,6 +15,7 @@ $router->group(['prefix' => 'contacts'], function () use ($router) {
 //Bookmarks
 $router->group(['prefix' => 'bookmarks'], function () use ($router) {
     $router->get('get-list', 'BookmarksController@getList');
+    $router->get('get-full-record/{id}', 'BookmarksController@getFullRecord');
     $router->post('upsert-record', 'BookmarksController@upsertRecord');
     $router->delete('delete-record', 'BookmarksController@deleteRecord');
 });
