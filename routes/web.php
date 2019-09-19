@@ -20,6 +20,11 @@ $router->group(['prefix' => 'bookmarks'], function () use ($router) {
     $router->delete('delete-record', 'BookmarksController@deleteRecord');
 });
 
+//Voter Database
+$router->group(['prefix' => 'voter-database'], function () use ($router) {
+    $router->get('search', 'VoterDatabaseController@search');
+});
+
 //Gun Violence Tracker
 $router->group(['prefix' => 'gun-violence-database'], function () use ($router) {
     $router->get('get-list', 'GunViolenceController@getList');
